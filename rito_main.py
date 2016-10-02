@@ -85,6 +85,7 @@ def main():
         print ('Most played Champ:',favChamp)
         print ('Wins:',favChampwin,'Losses:',favChamploss)
         i = i+1
+    sleep(5)
 
 
 
