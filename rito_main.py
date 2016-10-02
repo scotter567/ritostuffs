@@ -67,12 +67,10 @@ def getFavChamp(sumID, ssumID):
 
 def main():
     i = 0
-    amount = 1
-    #(int) (input("Enter the amount # of summs you wish to compare: "))
+    amount = (int) (input("Enter the amount # of summs you wish to compare: "))
 
     while i < amount:
-        sum_name = "jsimonsays"
-        #(str) (input("Enter your sum. name: "))
+        sum_name = (str) (input("Enter your sum. name: "))
         ssum_name = sum_name.lower()
         sumID = getSumId(ssum_name)
         ssumID = str(sumID)
