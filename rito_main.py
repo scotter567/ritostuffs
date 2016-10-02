@@ -29,7 +29,12 @@ def getSumLvl(sum_name):
 def getSumRank(ssumID):
     url = 'https://na.api.pvp.net/api/lol/na/v2.5/league/by-summoner/' + ssumID +'?api_key=3bbe1aa8-10d8-4862-8c68-b249f22e7b33'
     temp = (getJSON(url)) [ssumID][0]['tier']
-    temp2 = (getJSON(url)) [ssumID][0]['entries'][0]['division']
+    temp3 = ((getJSON(url)) [ssumID][0]['entries'])
+    for i in range(len(temp3)):
+        if (temp3[i]["playerOrTeamId"]) == ssumID:
+            numm = i
+            break
+    temp2 = (getJSON(url)) [ssumID][0]['entries'][numm]['division']
     return temp,temp2
     
 def getFavChamp(sumID, ssumID):
@@ -62,10 +67,12 @@ def getFavChamp(sumID, ssumID):
 
 def main():
     i = 0
-    amount = (int) (raw_input ("Enter the amount # of summs you wish to compare: "))
+    amount = 1
+    #(int) (input("Enter the amount # of summs you wish to compare: "))
 
     while i < amount:
-        sum_name = (str) (raw_input("Enter your sum. name: "))
+        sum_name = "jsimonsays"
+        #(str) (input("Enter your sum. name: "))
         ssum_name = sum_name.lower()
         sumID = getSumId(ssum_name)
         ssumID = str(sumID)
@@ -78,10 +85,9 @@ def main():
         print ('Most played Champ:',favChamp)
         print ('Wins:',favChampwin,'Losses:',favChamploss)
         i = i+1
+    sleep(5)
 
 
 
 if __name__ == "__main__":
     main()
-        
-                    
