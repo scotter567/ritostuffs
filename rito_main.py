@@ -1,5 +1,5 @@
 import requests
-import json
+import time
 
 def bubbleSort(jawn,jawn2,jawn3,jawn4): 
     for i in range(len(jawn)):
@@ -57,11 +57,13 @@ def getFavChamp(sumID, ssumID):
     favChampWin = list3[1]
     favChampLoss = list4[1]
     
-    url2 = 'https://global.api.pvp.net/api/lol/static-data/na/v1.2/champion/' + str(favChamp) +'?locale=en_US&champData=recommended&api_key=3bbe1aa8-10d8-4862-8c68-b249f22e7b33'
+    url2 = 'https://global.api.pvp.net/api/lol/static-data/na/v1.2/champion/' + str(favChamp) +'?locale=en_US&champData=tags&api_key=3bbe1aa8-10d8-4862-8c68-b249f22e7b33'
     response = requests.get(url2)
     responseJSON = response.json()
-    temp = responseJSON['recommended'][0]['champion']
-    return temp,favChampWin,favChampLoss
+    temp2 = responseJSON
+    temp = temp2['key']
+    temp3 = temp2['tags']
+    return temp,favChampWin,favChampLoss, temp3
     
 
 
@@ -69,9 +71,11 @@ def main():
     i = 0
     amount = 1
     #(int) (input("Enter the amount # of summs you wish to compare: "))
+    print("-------------------------------------------------------------------------------")
+    print()
 
-    while i < amount:
-        sum_name = "jsimonsays"
+    while amount > i:
+        sum_name = "statelyfall"
         #(str) (input("Enter your sum. name: "))
         ssum_name = sum_name.lower()
         sumID = getSumId(ssum_name)
@@ -81,11 +85,14 @@ def main():
         print ('Summoner Level:',sumLvl)
         sumRank,sumDiv = getSumRank(ssumID)
         print ('Summoner Rank:',sumRank,sumDiv)
-        favChamp,favChampwin, favChamploss = getFavChamp(sumID, ssumID)
+        favChamp,favChampwin, favChamploss,yourRole = getFavChamp(sumID, ssumID)
+        print ('Main Role:',yourRole[0]) 
         print ('Most played Champ:',favChamp)
         print ('Wins:',favChampwin,'Losses:',favChamploss)
         i = i+1
-    sleep(5)
+        if i != amount:
+            print ()
+            time.sleep(6)
 
 
 
